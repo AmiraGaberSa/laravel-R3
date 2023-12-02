@@ -28,6 +28,10 @@ Route:: get('ContactUs',function(){
 
 Route::prefix('Blog')->group(function(){
 
+    Route::get('/', function () {
+        return ('welcome');
+    });
+
     Route:: get('Science',function(){
         return 'welcome to science page';
     });
