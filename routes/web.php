@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view ('welcome');
 });
 
+Route::get('login',[PostController::class,'create'])->name('login');
+Route::post('logged',[PostController::class,'store'])->name('logged');
+
 
 // Route:: get('login',function(){
 //     return view ('login');
@@ -26,8 +29,7 @@ Route::get('/', function () {
 //     return 'you are logged in';
 // })->name('logged');
 
-Route::get('login',[PostController::class,'create'])->name('login');
-Route::post('logged',[PostController::class,'store'])->name('logged');
+
 
 // Route::prefix('Blog')->group(function(){
 
