@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,37 +18,40 @@ Route::get('/', function () {
 });
 
 
-Route:: get('About',function(){
-    return 'my new laravel website';
-});
+// Route:: get('login',function(){
+//     return view ('login');
+// });
 
-Route:: get('ContactUs',function(){
-    return 'Contact Us';
-});
+// Route:: post('logged',function(){
+//     return 'you are logged in';
+// })->name('logged');
 
-Route::prefix('Blog')->group(function(){
+Route::get('login',[PostController::class,'create'])->name('login');
+Route::post('logged',[PostController::class,'store'])->name('logged');
 
-    Route::get('/', function () {
-        return ('welcome');
-    });
+// Route::prefix('Blog')->group(function(){
 
-    Route:: get('Science',function(){
-        return 'welcome to science page';
-    });
+//     Route::get('/', function () {
+//         return ('welcome');
+//     });
 
-    Route::get('Sports',function(){
-        return 'welcome to sports page';
-    });
+//     Route:: get('Science',function(){
+//         return 'welcome to science page';
+//     });
 
-    Route::get('Math',function(){
-        return 'welcome to Math page';
-    });
+//     Route::get('Sports',function(){
+//         return 'welcome to sports page';
+//     });
 
-    Route::get('Medical',function(){
-        return 'welcome to Medical page';
-    });
+//     Route::get('Math',function(){
+//         return 'welcome to Math page';
+//     });
+
+//     Route::get('Medical',function(){
+//         return 'welcome to Medical page';
+//     });
     
-});
+// });
 
 
 // Route::fallback(function(){
