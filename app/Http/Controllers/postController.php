@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Post;
+
 class PostController extends Controller
 {
     /**
@@ -19,7 +21,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('login');
+       // return view('login');
+       return view('addPost');
     }
 
     /**
@@ -27,7 +30,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        $posts = new Post();
+        $posts->postTitle = $request->title;
+        $posts->description=  $request-> description;
+        $posts->author = $request->author;
+        if(isset( $request->published)){
+            $posts->published=1;
+        }else{
+            $posts->published=0;
+        }
+       
+
+        $posts->save();
+        return 'data added successfully';
     }
 
     /**

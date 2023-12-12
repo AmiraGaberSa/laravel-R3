@@ -7,24 +7,25 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.لانشاء قاعدة البيانات
+     * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('cars', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 100);
+            $table->string('postTitle', 100);
             $table->longText('description');
+            $table->string('author', 100);
             $table->boolean('published');
             $table->timestamps();
         });
     }
 
     /**
-     * Reverse the migrations.لحذف قاعدة البيانات
+     * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('cars');
+        Schema::dropIfExists('posts');
     }
 };

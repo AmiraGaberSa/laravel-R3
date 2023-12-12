@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CarController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +20,23 @@ Route::get('/', function () {
 
 Route::get('login',[PostController::class,'create'])->name('login');
 Route::post('logged',[PostController::class,'store'])->name('logged');
+
+
+// store data into car table
+// Route::get('storeCar',[CarController::class,'store']);
+
+//Routes for the car table
+Route::get('createCar',[CarController::class,'create']);
+Route::get('cars',[CarController::class,'index']);
+Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
+
+
+
+//Routes for the post table
+Route::get('createPost',[PostController::class,'create']);
+Route::post('storePost',[PostController::class,'store'])->name('storePost');
+
+
 
 
 // Route:: get('login',function(){
@@ -80,14 +98,7 @@ Route::post('logged',[PostController::class,'store'])->name('logged');
     //     return 'The age is : '.  $id . ' and the name is: '. $name;
     // })->where(['id' => '[0-9]+', 'name' => '[a-zA-Z]+']);
     
-    // Route::get('product/{category}',function($cat){
-    //     return 'The category is : '.  $cat;
+    Route::get('product/{category}',function($cat){
+        return 'The category is : '.  $cat;
+    });
     // })->whereIn('category',['laptop','pc','mobile']);
-    
-    
-
-
-
-
-
-
