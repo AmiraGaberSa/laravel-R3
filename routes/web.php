@@ -26,14 +26,21 @@ Route::post('logged',[PostController::class,'store'])->name('logged');
 // Route::get('storeCar',[CarController::class,'store']);
 
 //Routes for the car table
-Route::get('createCar',[CarController::class,'create']);
-Route::get('cars',[CarController::class,'index']);
+Route::get('createCar',[CarController::class,'create'])->name('createCar');
+Route::get('cars',[CarController::class,'index'])->name('cars');
+Route::get('updateCar/{id}',[CarController::class,'edit']);
+Route::put('update/{id}',[CarController::class,'update'])->name('update');
+Route::get('showCar/{id}',[CarController::class,'show'])->name('show');
 Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
 
 
 
 //Routes for the post table
-Route::get('createPost',[PostController::class,'create']);
+Route::get('createPost',[PostController::class,'create'])->name('createPost');
+Route::get('posts',[PostController::class,'index'])->name('posts');
+Route::get('updatePost/{id}',[PostController::class,'edit']);
+Route::put('update/{id}',[PostController::class,'update'])->name('update');
+Route::get('showPost/{id}',[PostController::class,'show'])->name('show');
 Route::post('storePost',[PostController::class,'store'])->name('storePost');
 
 

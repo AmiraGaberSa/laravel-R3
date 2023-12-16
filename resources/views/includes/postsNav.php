@@ -1,11 +1,11 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Cars</a>
+      <a class="navbar-brand" href="#">posts</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="{{ route('cars') }}">Home</a></li>
-      <li><a href="{{ route('createCar') }}">Insert car</a></li>
+      <li class="active"><a href="posts">Home</a></li>
+      <li><a href="createPost">Insert post</a></li>
       <li><a href="#">Page 2</a></li>
       <li><a href="#">Page 3</a></li>
     </ul>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Posts</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -9,39 +9,29 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-@include('includes.nav')
+@include('includes.postsNav')
 <div class="container">
-  <h2>Cars list</h2>
-  <p>The .table-hover class enables a hover state on table rows:</p>            
+  <h2>Posts list</h2>
   <table class="table table-hover">
     <thead>
       <tr>
         <th>Title</th>
-        <th>Description</th>
-        <th>Published</th>
+        <th>created_at</th>        
         <th>Edit</th>
         <th>Show</th>
       </tr>
     </thead>
     <tbody>
-    @foreach($cars as $car)
+    @foreach($posts as $post)
       <tr>
-        <td>{{ $car->title }}</td>
-        <td>{{ $car->description }}</td>
-        <td>
-          @if($car->published)
-              Yes
-          @else
-              No
-          @endif        
-        </td>
-        <td><a href="updateCar/{{ $car->id }}">Edit</a></td>
-        <td><a href="showCar/{{ $car->id }}">Show</a></td>
+        <td>{{ $post->postTitle }}</td>
+        <td>{{ $post->created_at }}</td>        
+        <td><a href="updatePost/{{ $post->id }}">Edit</a></td>
+        <td><a href="showPost/{{ $post->id }}">Show</a></td>
       </tr>
     @endforeach  
     </tbody>
   </table>
 </div>
-
 </body>
 </html>

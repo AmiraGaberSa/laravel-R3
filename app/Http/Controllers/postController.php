@@ -8,12 +8,14 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
+    private $columns = ['postTitle','description','author','published'];
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $posts = Post::get();                           //get data in variable in memmory-model Post
+        return view('posts', compact('posts'));         //view data in the page
     }
 
     /**
@@ -22,7 +24,7 @@ class PostController extends Controller
     public function create()
     {
        // return view('login');
-       return view('addPost');
+       return view('addpost');
     }
 
     /**
@@ -30,19 +32,23 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $posts = new Post();
-        $posts->postTitle = $request->title;
-        $posts->description=  $request-> description;
-        $posts->author = $request->author;
-        if(isset( $request->published)){
-            $posts->published=1;
-        }else{
-            $posts->published=0;
-        }
+        // $posts = new Post();
+        // $posts->postTitle = $request->postTitle;
+        // $posts->description=  $request-> description;
+        // $posts->author = $request->author;
+        // if(isset( $request->published)){
+        //     $posts->published=1;
+        // }else{
+        //     $posts->published=0;
+        // }
        
 
-        $posts->save();
-        return 'data added successfully';
+        // $posts->save();
+        // return redirect('posts');
+      $data= $request->only($this->columns);
+      $data['published'] = isset($request->published);
+      post::create($data);
+      return redirect('posts');
     }
 
     /**
@@ -50,7 +56,8 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post = Post::findOrFail($id);                     
+        return view('showPost', compact('post'));  
     }
 
     /**
@@ -58,7 +65,8 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::findOrFail($id);                     
+        return view('updatePost', compact('post'));  
     }
 
     /**
@@ -66,7 +74,10 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+      $data= $request->only($this->columns);
+      $data['published'] = isset($request->published);
+      Post::where('id',$id)->update($data);
+      return redirect('posts');
     }
 
     /**
