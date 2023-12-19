@@ -23,7 +23,7 @@ class PostController extends Controller
      */
     public function create()
     {
-       // return view('login');
+       
        return view('addpost');
     }
 
@@ -45,10 +45,21 @@ class PostController extends Controller
 
         // $posts->save();
         // return redirect('posts');
-      $data= $request->only($this->columns);
-      $data['published'] = isset($request->published);
-      post::create($data);
-      return redirect('posts');
+
+
+         //best method for insert and update
+         $data = $request->validate([
+            'postTitle'=>'required|string|max:50',
+            'description'=> 'required|string',
+            'author'=>'required|string|max:50',
+           ]);
+
+       $data['published'] = isset($request->published);
+       Post::create($data);
+       return redirect('posts');
+
+    //   
+    
     }
 
     /**
@@ -80,11 +91,30 @@ class PostController extends Controller
       return redirect('posts');
     }
 
-    /**
+   /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        Post::where('id',$id)->delete();
+        return redirect('posts');
+    }
+
+    public function trashed()
+    {
+        $posts= Post::onlyTrashed()->get();
+        return view('trashed', compact('posts'));
+    }
+
+    public function forceDelete(string $id)
+    {
+        Post::where('id',$id)->forceDelete();
+        return redirect('posts');
+    }
+
+    public function restore(string $id)
+    {
+        Post::where('id',$id)->restore();
+        return redirect('posts');
     }
 }
