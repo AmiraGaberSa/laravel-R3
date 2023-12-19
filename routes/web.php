@@ -18,8 +18,8 @@ Route::get('/', function () {
     return view ('welcome');
 });
 
-Route::get('login',[PostController::class,'create'])->name('login');
-Route::post('logged',[PostController::class,'store'])->name('logged');
+// Route::get('login',[PostController::class,'create'])->name('login');
+// Route::post('logged',[PostController::class,'store'])->name('logged');
 
 
 // store data into car table
@@ -40,6 +40,7 @@ Route::post('logged',[PostController::class,'store'])->name('logged');
 
 
 //Routes for the post table
+
 Route::get('createPost',[PostController::class,'create'])->name('createPost');
 Route::get('posts',[PostController::class,'index'])->name('posts');
 Route::get('updatePost/{id}',[PostController::class,'edit']);
