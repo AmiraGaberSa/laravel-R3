@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\ExampleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +19,13 @@ Route::get('/', function () {
     return view ('welcome');
 });
 
+Route::get('test', function () {
+    return view ('test');
+});
+
+Route::get('image', function () {
+    return view ('image');
+});
 // Route::get('login',[PostController::class,'create'])->name('login');
 // Route::post('logged',[PostController::class,'store'])->name('logged');
 
@@ -25,32 +33,35 @@ Route::get('/', function () {
 // store data into car table
 // Route::get('storeCar',[CarController::class,'store']);
 
+Route::post('imageUpload',[ExampleController::class,'upload'])->name('imageUpload');
+
+
 //Routes for the car table
-// Route::get('createCar',[CarController::class,'create'])->name('createCar');
-// Route::get('cars',[CarController::class,'index'])->name('cars');
-// Route::get('updateCar/{id}',[CarController::class,'edit']);
-// Route::put('update/{id}',[CarController::class,'update'])->name('update');
-// Route::get('showCar/{id}',[CarController::class,'show'])->name('show');
-// Route::get('deleteCar/{id}',[CarController::class,'destroy']);
-// Route::get('trashed',[CarController::class,'trashed'])->name('trashed');
-// Route::get('restoreCar/{id}',[CarController::class,'restore'])->name('restoreCar');
-// Route::get('forceDelete/{id}',[CarController::class,'forceDelete'])->name('forceDelete');
-// Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
+Route::get('createCar',[CarController::class,'create'])->name('createCar');
+Route::get('cars',[CarController::class,'index'])->name('cars');
+Route::get('updateCar/{id}',[CarController::class,'edit']);
+Route::put('update/{id}',[CarController::class,'update'])->name('update');
+Route::get('showCar/{id}',[CarController::class,'show'])->name('show');
+Route::get('deleteCar/{id}',[CarController::class,'destroy']);
+Route::get('trashed',[CarController::class,'trashed'])->name('trashed');
+Route::get('restoreCar/{id}',[CarController::class,'restore'])->name('restoreCar');
+Route::get('forceDelete/{id}',[CarController::class,'forceDelete'])->name('forceDelete');
+Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
 
 
 
 //Routes for the post table
 
-Route::get('createPost',[PostController::class,'create'])->name('createPost');
-Route::get('posts',[PostController::class,'index'])->name('posts');
-Route::get('updatePost/{id}',[PostController::class,'edit']);
-Route::put('update/{id}',[PostController::class,'update'])->name('update');
-Route::get('showPost/{id}',[PostController::class,'show'])->name('show');
-Route::post('storePost',[PostController::class,'store'])->name('storePost');
-Route::get('deletePost/{id}',[PostController::class,'destroy']);
-Route::get('trashed',[PostController::class,'trashed'])->name('trashed');
-Route::get('forceDelete/{id}',[PostController::class,'forceDelete'])->name('forceDelete');
-Route::get('restorePost/{id}',[PostController::class,'restore'])->name('restorePost');
+// Route::get('createPost',[PostController::class,'create'])->name('createPost');
+// Route::get('posts',[PostController::class,'index'])->name('posts');
+// Route::get('updatePost/{id}',[PostController::class,'edit']);
+// Route::put('update/{id}',[PostController::class,'update'])->name('update');
+// Route::get('showPost/{id}',[PostController::class,'show'])->name('show');
+// Route::post('storePost',[PostController::class,'store'])->name('storePost');
+// Route::get('deletePost/{id}',[PostController::class,'destroy']);
+// Route::get('trashed',[PostController::class,'trashed'])->name('trashed');
+// Route::get('forceDelete/{id}',[PostController::class,'forceDelete'])->name('forceDelete');
+// Route::get('restorePost/{id}',[PostController::class,'restore'])->name('restorePost');
 
 
 
