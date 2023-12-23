@@ -95,7 +95,7 @@ class CarController extends Controller
     //    //best method for insert and update
        $messages = $this->messages();
        $data = $request->validate([
-           'title'=>'required|string|max:5',
+           'title'=>'required|string|max:50',
            'description'=> 'required|string',
         //    'image' => 'mimes:png,jpg,jpeg|max:2048',
           ]);
