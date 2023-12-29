@@ -17,6 +17,7 @@ return new class extends Migration
             $table->longText('description');
             $table->boolean('published');
             $table->string('image', 100);
+            $table->foreignId('category_id')->constrained('categories');
             $table->softDeletes();
             $table->timestamps();
         });

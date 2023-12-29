@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\File;
 class CarController extends Controller
 {
     use Common;
-    //private $columns = ['title','description','published'];
+    private $columns = ['title','description','published'];
     /**
      * Display a listing of the resource.
      */
@@ -91,26 +91,43 @@ class CarController extends Controller
     public function update(Request $request, string $id)
     {
    
-       $car = Car::findOrFail($id);   
-    //    //best method for insert and update
-       $messages = $this->messages();
-       $data = $request->validate([
-           'title'=>'required|string|max:50',
-           'description'=> 'required|string',
-        //    'image' => 'mimes:png,jpg,jpeg|max:2048',
-          ]);
-          if($request->hasFile('image') && request('image') !='' ){
-            $destination = 'assets/images/'.$car->image;
-               if(file::exists($destination)){
-                   file::delete($destination);
-               }
-            $fileName = $this->uploadFile($request->image,'assets/images');    //html name,path
-            $data['image'] = $fileName; 
-          }
-         $data['published'] = isset($request->published);
-         Car::where('id',$id)->update($data); 
+    //    $car = Car::findOrFail($id);   
+    // //    //best method for insert and update
+    //    $messages = $this->messages();
+    //    $data = $request->validate([
+    //        'title'=>'required|string|max:50',
+    //        'description'=> 'required|string',
+    //     //    'image' => 'mimes:png,jpg,jpeg|max:2048',
+    //       ]);
+    //       if($request->hasFile('image') && request('image') !='' ){
+    //         $destination = 'assets/images/'.$car->image;
+    //            if(file::exists($destination)){
+    //                file::delete($destination);
+    //            }
+    //         $fileName = $this->uploadFile($request->image,'assets/images');    //html name,path
+    //         $data['image'] = $fileName; 
+    //       }
+    //      $data['published'] = isset($request->published);
+    //      Car::where('id',$id)->update($data); 
 
-        return back()->With('success','car data updated successfully');   
+    //     return back()->With('success','car data updated successfully');   
+        $data = $request->only($this->columns);
+        $messages = $this->messages();
+        $data = $request->validate([
+             'title'=>'required|string|max:50',
+             'description'=> 'required|string',
+             'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+            ], $messages);
+
+        if($request->hasFile('image')){
+            $fileName = $this->uploadFile($request->image, 'assets/images');  
+            $data['image'] = $fileName;
+            unlink("assets/images/" . $request->oldImage);
+        }
+
+        $data['published'] = isset($request->published);
+        Car::where('id', $id)->update($data);
+        return redirect('cars');
     }
 
     /**
