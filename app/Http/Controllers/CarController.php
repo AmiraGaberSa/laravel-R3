@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\car;
+use App\Models\Category;
 use App\Traits\Common;
 use Illuminate\Support\Facades\File;
 
@@ -26,10 +27,12 @@ class CarController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('addCar');
+    { 
+        $categories =Category::get();
+        return view('addCar',compact('categories'));
     }
 
+    
     /**
      * Store a newly created resource in storage.
      */
@@ -55,6 +58,7 @@ class CarController extends Controller
             'title'=>'required|string|max:50',
             'description'=> 'required|string',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'category_id' => 'required',
            ],$messages);
         $fileName = $this->uploadFile($request->image, 'assets/images');    //html name,path
         $data['image'] = $fileName;
@@ -82,7 +86,8 @@ class CarController extends Controller
     public function edit(string $id)
     {
         $car = Car::findOrFail($id);                     
-        return view('updateCar', compact('car'));    //show car detailes by compact
+        $categories = Category::select('id', 'cat_name')->get();
+        return view('updateCar',compact('car', 'categories'));   //show car and categories detailes by compact
     }
 
     /**
@@ -117,6 +122,7 @@ class CarController extends Controller
              'title'=>'required|string|max:50',
              'description'=> 'required|string',
              'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+             'category_id' => 'required',
             ], $messages);
 
         if($request->hasFile('image')){
