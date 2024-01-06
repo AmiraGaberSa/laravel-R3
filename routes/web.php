@@ -46,7 +46,7 @@ Route::post('imageUpload',[ExampleController::class,'upload'])->name('imageUploa
 
 
 //Routes for the car table
-Route::get('createCar',[CarController::class,'create'])->name('createCar');
+Route::get('createCar',[CarController::class,'create'])->middleware('verified')->name('createCar');
 Route::get('cars',[CarController::class,'index'])->name('cars');
 Route::get('updateCar/{id}',[CarController::class,'edit']);
 Route::put('update/{id}',[CarController::class,'update'])->name('update');
@@ -56,6 +56,7 @@ Route::get('trashed',[CarController::class,'trashed'])->name('trashed');
 Route::get('restoreCar/{id}',[CarController::class,'restore'])->name('restoreCar');
 Route::get('forceDelete/{id}',[CarController::class,'forceDelete'])->name('forceDelete');
 Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
+Auth::routes(['verify'=>true]);
 
 
 
@@ -139,3 +140,6 @@ Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
     });
     // })->whereIn('category',['laptop','pc','mobile']);
     
+//Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
