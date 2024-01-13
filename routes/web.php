@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\ContactUsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,9 +25,9 @@ Route::get('test', function () {
 })->name('testHome');
 
 
-Route::get('contact', function () {
-    return view ('contact');
-})->name('contact');
+//Route::get('contact', function () {
+//    return view ('contact');
+//})->name('contact');
 
 Route::get('404', function () {
     return view ('404');
@@ -58,7 +59,14 @@ Route::get('forceDelete/{id}',[CarController::class,'forceDelete'])->name('force
 Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
 Auth::routes(['verify'=>true]);
 
+Route::get('test20',[ExampleController::class,'createSession']);
 
+
+//Route::get('/contact', [ContactUsFormController::class, 'createForm'])
+//Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store')
+
+Route::get('contact',[ContactUsController::class, 'contact'])->name('contact');
+Route::post('postContact',[ContactUsController::class, 'postContact'])->name('postContact');
 
 //Routes for the post table
 
@@ -140,6 +148,6 @@ Auth::routes(['verify'=>true]);
     });
     // })->whereIn('category',['laptop','pc','mobile']);
     
-//Auth::routes();
+Auth::routes(['verify'=>true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
