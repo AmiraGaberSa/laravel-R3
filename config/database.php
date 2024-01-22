@@ -45,6 +45,10 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
+            'dump' => [
+               'dump_binary_path' => env('DB_MYSQLDUMP_PATH'), // only the path, so without `mysqldump` or `pg_dump`
+               
+            ],
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
@@ -61,6 +65,7 @@ return [
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
+            
         ],
 
         'pgsql' => [

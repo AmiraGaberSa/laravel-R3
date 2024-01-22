@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\File;
 class CarController extends Controller
 {
     use Common;
-    private $columns = ['title','description','published'];
+  //  private $columns = ['title','description','published'];
     /**
      * Display a listing of the resource.
      */
@@ -128,7 +128,7 @@ class CarController extends Controller
         if($request->hasFile('image')){
             $fileName = $this->uploadFile($request->image, 'assets/images');  
             $data['image'] = $fileName;
-            unlink("assets/images/" . $request->oldImage);
+            unlink("assets/images/" . $request->oldImage); //delete old image
         }
 
         $data['published'] = isset($request->published);

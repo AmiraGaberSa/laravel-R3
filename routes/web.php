@@ -45,8 +45,13 @@ Route::get('image', function () {
 
 Route::post('imageUpload',[ExampleController::class,'upload'])->name('imageUpload');
 
-
-//Routes for the car table
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){ //...
+   
+    //Routes for the car table
 Route::get('createCar',[CarController::class,'create'])->middleware('verified')->name('createCar');
 Route::get('cars',[CarController::class,'index'])->name('cars');
 Route::get('updateCar/{id}',[CarController::class,'edit']);
@@ -57,7 +62,10 @@ Route::get('trashed',[CarController::class,'trashed'])->name('trashed');
 Route::get('restoreCar/{id}',[CarController::class,'restore'])->name('restoreCar');
 Route::get('forceDelete/{id}',[CarController::class,'forceDelete'])->name('forceDelete');
 Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
+});
+
 Auth::routes(['verify'=>true]);
+
 
 Route::get('test20',[ExampleController::class,'createSession']);
 
